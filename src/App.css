@@ -1,148 +1,335 @@
 :root {
-  --bg: #f4eee6;
-  --ink: #151515;
-  --deep-green: #1f4d3c;
-  --rust: #b14a2c;
-  --card: #fffaf5;
-  --line: #d8c9b5;
+  --white:      #ffffff;
+  --off-white:  #f7f8fa;
+  --border:     #e4e7ed;
+  --muted:      #6b7280;
+  --ink:        #111827;
+  --navy:       #0d2240;
+  --accent:     #1a56db;
+  --accent-dk:  #1043b5;
+  --danger:     #dc2626;
 }
 
 * {
   box-sizing: border-box;
 }
 
-.page {
-  min-height: 100vh;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 12% 12%, rgba(177, 74, 44, 0.2), transparent 45%),
-    radial-gradient(circle at 84% 0%, rgba(31, 77, 60, 0.23), transparent 45%),
-    var(--bg);
+/* ── NAV ──────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1.2rem, 5vw, 4rem);
+  height: 60px;
 }
 
+.nav-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ── PAGE ─────────────────────────────── */
+.page {
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* ── HERO ─────────────────────────────── */
 .hero {
-  padding: clamp(2rem, 6vw, 5rem) clamp(1.2rem, 5vw, 4rem) 2rem;
+  background: var(--navy);
+  color: var(--white);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.2rem, 5vw, 4rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle diagonal stripe texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,0.025) 40px,
+    rgba(255,255,255,0.025) 41px
+  );
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 720px;
 }
 
 .eyebrow {
-  margin: 0;
+  margin: 0 0 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--deep-green);
+  color: var(--accent);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 h1 {
-  margin: 0.5rem 0;
-  font-size: clamp(2.6rem, 10vw, 6rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
+  margin: 0 0 0.75rem;
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: var(--white);
 }
 
 .tagline {
   margin: 0;
-  font-size: clamp(1rem, 2.6vw, 1.4rem);
-  max-width: 38rem;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  color: rgba(255,255,255,0.7);
+  max-width: 36rem;
+  line-height: 1.6;
 }
 
 .hero-actions {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.hero-actions button,
-.hero-actions a {
-  border-radius: 999px;
-  padding: 0.72rem 1.2rem;
+.btn-primary {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 0.72rem 1.4rem;
   font-weight: 700;
+  font-size: 0.9rem;
   text-decoration: none;
-  border: 2px solid var(--ink);
-  color: var(--ink);
-  background: transparent;
-}
-
-.hero-actions button {
-  background: var(--deep-green);
-  border-color: var(--deep-green);
-  color: #f8f5ef;
+  border: 2px solid var(--accent);
+  color: var(--white);
+  background: var(--accent);
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 
+.btn-primary:hover {
+  background: var(--accent-dk);
+  border-color: var(--accent-dk);
+}
+
+.btn-ghost {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 0.72rem 1.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.35);
+  color: var(--white);
+  background: transparent;
+  transition: border-color 0.15s;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.7);
+}
+
+/* ── MAIN CONTENT ─────────────────────── */
 main {
-  padding: 0 clamp(1.2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
-  display: grid;
-  gap: 1rem;
+  padding: 2.5rem clamp(1.2rem, 5vw, 4rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: var(--off-white);
 }
 
-.panel {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  padding: clamp(1rem, 3vw, 1.5rem);
+/* ── SECTION TITLE ────────────────────── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
 }
 
-.panel h2 {
-  margin-top: 0;
-  font-size: clamp(1.2rem, 3vw, 1.7rem);
-}
-
-.fixture-grid,
-.squad-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-}
-
-.fixture-card,
-.player-card {
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  padding: 0.9rem;
-  background: #fffcf8;
-}
-
-.date,
-.number {
+.section-label h2 {
   margin: 0;
-  color: var(--rust);
-  font-weight: 800;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--navy);
 }
 
-.fixture-card h3,
-.player-card h3 {
-  margin: 0.35rem 0;
+.section-label::before {
+  content: '';
+  width: 4px;
+  height: 1.3em;
+  background: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
+/* ── PANEL / CARD ─────────────────────── */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+/* ── FIXTURE CARDS ────────────────────── */
+.fixture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.875rem;
+}
+
+.fixture-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  background: var(--off-white);
+  transition: box-shadow 0.15s;
+}
+
+.fixture-card:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.date {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.fixture-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.fixture-card p:last-child {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ── IDENTITY SPLIT ───────────────────── */
 .split {
   display: grid;
-  gap: 1rem;
-  align-items: stretch;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.identity-text p {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
 }
 
 .crest {
-  border-radius: 0.75rem;
-  border: 1px dashed var(--deep-green);
+  border-radius: 10px;
+  border: 1.5px solid var(--navy);
   display: grid;
   place-content: center;
-  background: #e5eee8;
+  background: var(--navy);
+  color: var(--white);
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
+  min-height: 140px;
 }
 
 .crest p {
   margin: 0.1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .crest .big {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 2.8rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
+  opacity: 1;
+  line-height: 1.1;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* ── SQUAD CARDS ──────────────────────── */
+.squad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.875rem;
+}
+
+.player-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  transition: box-shadow 0.15s;
+}
+
+.player-card:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.number {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.player-card h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.player-card p:last-child {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
 }
 
 @media (min-width: 860px) {
   .split {
-    grid-template-columns: 1.7fr 1fr;
+    grid-template-columns: 1.8fr 1fr;
   }
 }
