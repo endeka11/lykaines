@@ -97,6 +97,36 @@ const schedule = [
 
 const rounds = [...new Set(schedule.map(m => m.round))]
 
+// ── Αυτόματος υπολογισμός βαθμολογίας ──────
+function computeStandings() {
+  const table = {}
+  schedule.forEach(({ home, away, scoreHome, scoreAway }) => {
+    if (scoreHome === undefined) return
+    ;[home, away].forEach(t => {
+      if (!table[t]) table[t] = { team: t, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0 }
+    })
+    table[home].p++; table[away].p++
+    table[home].gf += scoreHome; table[home].ga += scoreAway
+    table[away].gf += scoreAway; table[away].ga += scoreHome
+    if (scoreHome > scoreAway) {
+      table[home].w++; table[away].l++
+    } else if (scoreHome < scoreAway) {
+      table[away].w++; table[home].l++
+    } else {
+      table[home].d++; table[away].d++
+    }
+  })
+  return Object.values(table).sort((a, b) => {
+    const pts = (t) => t.w * 3 + t.d
+    if (pts(b) !== pts(a)) return pts(b) - pts(a)
+    const gd = (t) => t.gf - t.ga
+    if (gd(b) !== gd(a)) return gd(b) - gd(a)
+    return b.gf - a.gf
+  })
+}
+
+const standings = computeStandings()
+
 const squad = [
   { name: 'Ελένα Μάρκου',    role: 'Αρχηγός · Κεντρική Αμυντική', number: 4 },
   { name: 'Δάνα Κώστα',      role: 'Δημιουργός · Κεντρική Μέση', number: 8 },
@@ -116,6 +146,61 @@ function getResult(match) {
   if (ourScore > theirScore) return 'win'
   if (ourScore < theirScore) return 'loss'
   return 'draw'
+}
+
+function StandingsModal({ onClose }) {
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <div>
+            <p className="modal-eyebrow">Γ΄ Εθνική Γυναικών — 3ος Όμιλος</p>
+            <h2 className="modal-title">Βαθμολογία</h2>
+          </div>
+          <button className="modal-close" onClick={onClose} aria-label="Κλείσιμο">✕</button>
+        </div>
+        <div className="modal-body" style={{ padding: '0 0 1.5rem' }}>
+          <table className="standings-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th className="col-team">Ομάδα</th>
+                <th title="Αγώνες">Αγ</th>
+                <th title="Νίκες">Ν</th>
+                <th title="Ισοπαλίες">Ι</th>
+                <th title="Ήττες">Η</th>
+                <th title="Γκολ Υπέρ">ΓΥ</th>
+                <th title="Γκολ Κατά">ΓΚ</th>
+                <th title="Διαφορά">ΔΓ</th>
+                <th title="Βαθμοί">Βαθ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {standings.map((t, i) => {
+                const pts = t.w * 3 + t.d
+                const gd = t.gf - t.ga
+                const isOur = t.team === OUR_TEAM
+                return (
+                  <tr key={t.team} className={isOur ? 'our-row' : ''}>
+                    <td className="col-pos">{i + 1}</td>
+                    <td className="col-team">{t.team}{isOur ? ' 🐺' : ''}</td>
+                    <td>{t.p}</td>
+                    <td>{t.w}</td>
+                    <td>{t.d}</td>
+                    <td>{t.l}</td>
+                    <td>{t.gf}</td>
+                    <td>{t.ga}</td>
+                    <td>{gd > 0 ? `+${gd}` : gd}</td>
+                    <td className="col-pts">{pts}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function ScheduleModal({ onClose }) {
@@ -172,15 +257,22 @@ function ScheduleModal({ onClose }) {
 
 function App() {
   const [showSchedule, setShowSchedule] = useState(false)
+  const [showStandings, setShowStandings] = useState(false)
 
   return (
     <div className="page">
-      {showSchedule && <ScheduleModal onClose={() => setShowSchedule(false)} />}
+      {showSchedule  && <ScheduleModal  onClose={() => setShowSchedule(false)} />}
+      {showStandings && <StandingsModal onClose={() => setShowStandings(false)} />}
 
       {/* NAV */}
       <nav className="nav">
         <span className="nav-brand">ΛΥΚΑΙΝΕΣ</span>
         <ul className="nav-links">
+          <li>
+            <button className="nav-btn" onClick={() => setShowStandings(true)}>
+              Βαθμολογία
+            </button>
+          </li>
           <li>
             <button className="nav-btn" onClick={() => setShowSchedule(true)}>
               Πρόγραμμα Αγώνων
