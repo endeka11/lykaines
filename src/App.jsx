@@ -33,8 +33,8 @@ function App() {
           <h1>ΛΥΚΑΙΝΕΣ</h1>
           <p className="tagline">Fearless football, one pack, one purpose.</p>
           <div className="hero-actions">
-            <button type="button" className="btn-primary">Buy Tickets</button>
-            <a href="#fixtures" className="btn-ghost">See Fixtures</a>
+            <a href="#fixtures" className="btn-primary">See Fixtures</a>
+            <a href="#squad" className="btn-ghost">Our Squad</a>
           </div>
         </div>
       </header>
