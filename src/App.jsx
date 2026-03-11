@@ -1,16 +1,16 @@
 import './App.css'
 
 const fixtures = [
-  { date: 'March 22', opponent: 'Athena FC', venue: 'Home — Wolf Arena' },
-  { date: 'March 30', opponent: 'Sparta Women', venue: 'Away — Leonidas Park' },
-  { date: 'April 6', opponent: 'Thessalia 04', venue: 'Home — Wolf Arena' },
+  { date: '22 Μαρ', opponent: 'Athena FC', venue: 'Εντός — Wolf Arena' },
+  { date: '30 Μαρ', opponent: 'Sparta Women', venue: 'Εκτός — Leonidas Park' },
+  { date: '6 Απρ', opponent: 'Thessalia 04', venue: 'Εντός — Wolf Arena' },
 ]
 
 const squad = [
-  { name: 'Elena Markou',    role: 'Captain · CB', number: 4 },
-  { name: 'Dana Kosta',      role: 'Playmaker · CM', number: 8 },
-  { name: 'Iris Vlahou',     role: 'Striker · ST', number: 9 },
-  { name: 'Nefeli Arvaniti', role: 'Goalkeeper · GK', number: 1 },
+  { name: 'Ελένα Μάρκου',    role: 'Αρχηγός · Κεντρική Αμυντική', number: 4 },
+  { name: 'Δάνα Κώστα',      role: 'Δημιουργός · Κεντρική Μέση', number: 8 },
+  { name: 'Ίρις Βλάχου',     role: 'Επιθετική · Κέντρο Επίθεσης', number: 9 },
+  { name: 'Νεφέλη Αρβανίτη', role: 'Τερματοφύλακας', number: 1 },
 ]
 
 function App() {
@@ -20,21 +20,21 @@ function App() {
       <nav className="nav">
         <span className="nav-brand">ΛΥΚΑΙΝΕΣ</span>
         <ul className="nav-links">
-          <li><a href="#fixtures">Fixtures</a></li>
-          <li><a href="#identity">Club</a></li>
-          <li><a href="#squad">Squad</a></li>
+          <li><a href="#fixtures">Αγώνες</a></li>
+          <li><a href="#identity">Σύλλογος</a></li>
+          <li><a href="#squad">Ομάδα</a></li>
         </ul>
       </nav>
 
       {/* HERO */}
       <header className="hero">
         <div className="hero-inner">
-          <p className="eyebrow">Women&apos;s Football Club</p>
+          <p className="eyebrow">Γυναικεία Ποδοσφαιρική Ομάδα</p>
           <h1>ΛΥΚΑΙΝΕΣ</h1>
-          <p className="tagline">Fearless football, one pack, one purpose.</p>
+          <p className="tagline">Αδέσμευτο ποδόσφαιρο, μία αγέλη, ένας σκοπός.</p>
           <div className="hero-actions">
-            <a href="#fixtures" className="btn-primary">See Fixtures</a>
-            <a href="#squad" className="btn-ghost">Our Squad</a>
+            <a href="#fixtures" className="btn-primary">Επόμενοι Αγώνες</a>
+            <a href="#squad" className="btn-ghost">Η Ομάδα μας</a>
           </div>
         </div>
       </header>
@@ -42,12 +42,12 @@ function App() {
       <main>
         {/* FIXTURES */}
         <section id="fixtures" className="panel">
-          <div className="section-label"><h2>Upcoming Matches</h2></div>
+          <div className="section-label"><h2>Επερχόμενοι Αγώνες</h2></div>
           <div className="fixture-grid">
             {fixtures.map((match) => (
               <article key={`${match.date}-${match.opponent}`} className="fixture-card">
                 <p className="date">{match.date}</p>
-                <h3>vs {match.opponent}</h3>
+                <h3>εναντίον {match.opponent}</h3>
                 <p>{match.venue}</p>
               </article>
             ))}
@@ -57,15 +57,15 @@ function App() {
         {/* IDENTITY */}
         <section id="identity" className="panel split">
           <div className="identity-text">
-            <div className="section-label"><h2>Club Identity</h2></div>
+            <div className="section-label"><h2>Ταυτότητα Συλλόγου</h2></div>
             <p>
-              ΛΥΚΑΙΝΕΣ is built on intensity, discipline, and collective strength.
-              We represent women in sport with pride and fight for every ball,
-              every run, and every moment on the pitch.
+              Οι ΛΥΚΑΙΝΕΣ οικοδομήθηκαν πάνω στην ένταση, την πειθαρχία και τη συλλογική δύναμη.
+              Εκπροσωπούμε τις γυναίκες στον αθλητισμό με περηφάνια και παλεύουμε για κάθε μπάλα,
+              κάθε τρέξιμο και κάθε στιγμή στο γήπεδο.
             </p>
           </div>
           <aside className="crest">
-            <p>Est. 2018</p>
+            <p>Ιδρ. 2018</p>
             <p className="big">ΛΥΚ</p>
             <p>City Pack</p>
           </aside>
@@ -73,7 +73,7 @@ function App() {
 
         {/* SQUAD */}
         <section id="squad" className="panel">
-          <div className="section-label"><h2>Core Squad</h2></div>
+          <div className="section-label"><h2>Βασική Ομάδα</h2></div>
           <div className="squad-grid">
             {squad.map((player) => (
               <article key={player.name} className="player-card">
@@ -87,7 +87,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <span>ΛΥΚΑΙΝΕΣ</span> · Women&apos;s Football Club · Est. 2018
+        <span>ΛΥΚΑΙΝΕΣ</span> · Γυναικεία Ποδοσφαιρική Ομάδα · Ιδρ. 2018
       </footer>
     </div>
   )
