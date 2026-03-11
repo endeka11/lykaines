@@ -1,4 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+function useEscClose(onClose) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+}
 import './App.css'
 
 const OUR_TEAM = 'Λύκοι Αιγιαλείας'
@@ -149,6 +157,7 @@ function getResult(match) {
 }
 
 function StandingsModal({ onClose }) {
+  useEscClose(onClose)
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
@@ -204,6 +213,7 @@ function StandingsModal({ onClose }) {
 }
 
 function ScheduleModal({ onClose }) {
+  useEscClose(onClose)
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
