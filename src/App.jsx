@@ -85,6 +85,10 @@ function App() {
           </div>
         </section>
       </main>
+
+      <footer className="footer">
+        <span>ΛΥΚΑΙΝΕΣ</span> · Women&apos;s Football Club · Est. 2018
+      </footer>
     </div>
   )
 }
