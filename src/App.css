@@ -1,0 +1,148 @@
+:root {
+  --bg: #f4eee6;
+  --ink: #151515;
+  --deep-green: #1f4d3c;
+  --rust: #b14a2c;
+  --card: #fffaf5;
+  --line: #d8c9b5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(177, 74, 44, 0.2), transparent 45%),
+    radial-gradient(circle at 84% 0%, rgba(31, 77, 60, 0.23), transparent 45%),
+    var(--bg);
+}
+
+.hero {
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.2rem, 5vw, 4rem) 2rem;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--deep-green);
+}
+
+h1 {
+  margin: 0.5rem 0;
+  font-size: clamp(2.6rem, 10vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(1rem, 2.6vw, 1.4rem);
+  max-width: 38rem;
+}
+
+.hero-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-actions button,
+.hero-actions a {
+  border-radius: 999px;
+  padding: 0.72rem 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+
+.hero-actions button {
+  background: var(--deep-green);
+  border-color: var(--deep-green);
+  color: #f8f5ef;
+  cursor: pointer;
+}
+
+main {
+  padding: 0 clamp(1.2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+}
+
+.fixture-grid,
+.squad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.fixture-card,
+.player-card {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 0.9rem;
+  background: #fffcf8;
+}
+
+.date,
+.number {
+  margin: 0;
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.fixture-card h3,
+.player-card h3 {
+  margin: 0.35rem 0;
+}
+
+.split {
+  display: grid;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.crest {
+  border-radius: 0.75rem;
+  border: 1px dashed var(--deep-green);
+  display: grid;
+  place-content: center;
+  background: #e5eee8;
+  text-align: center;
+  padding: 1rem;
+}
+
+.crest p {
+  margin: 0.1rem;
+}
+
+.crest .big {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+@media (min-width: 860px) {
+  .split {
+    grid-template-columns: 1.7fr 1fr;
+  }
+}
